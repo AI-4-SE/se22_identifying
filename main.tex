@@ -1,0 +1,77 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = de_DE
+
+%% Dies gibt Warnungen aus, sollten veraltete LaTeX-Befehle verwendet werden
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass[utf8,biblatex]{lni}
+\bibliography{lni-paper-example-de}
+
+%% Schöne Tabellen mittels \toprule, \midrule, \bottomrule
+\usepackage{booktabs}
+
+%% Zu Demonstrationszwecken
+\usepackage[math]{blindtext}
+\usepackage{mwe}
+
+%\usepackage[subtle]{savetrees}
+\usepackage{microtype}
+
+%% BibLaTeX-Sonderkonfiguration,
+%% falls man schnell eine existierende Bibliographie wiederverwenden will, aber nicht die .bib-Datei händisch anpassen möchte.
+%% Bitte \iffalse und \fi entfernen, dann ist diese Konfiguration aktiviert.
+
+\iffalse
+\AtEveryBibitem{%
+  \ifentrytype{article}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+  \ifentrytype{inproceedings}{%
+  }{%
+    \clearfield{doi}%
+    \clearfield{issn}%
+    \clearfield{url}%
+    \clearfield{urldate}%
+  }%
+}
+\fi
+
+\begin{document}
+%%% Mehrere Autoren werden durch \and voneinander getrennt.
+%%% Die Fußnote enthält die Adresse sowie eine E-Mail-Adresse.
+%%% Das optionale Argument (sofern angegeben) wird für die Kopfzeile verwendet.
+\title[Identifying Software Performance Changes Across Variants and Versions]{Identifying Software Performance Changes\\ Across Variants and Versions}
+%%%\subtitle{Untertitel / Subtitle} % falls benötigt
+\author[Stefan Mühlbauer \and Sven Apel \and Norbert Siegmund]
+{Stefan Mühlbauer\footnote{Universität Leipzig, Institut für Informatik, Leipzig, Deutschland, \email{muehlbauer@informatik.uni-leipzig.de}} \and
+Sven Apel\textbf{\footnote{Universität des Saarlandes, Saarland Informatics Campus, Saarbrücken, Deutschland, \email{apel@cs.uni-saarland.de}}} \and
+Norbert Siegmund\footnote{Universität Leipzig, Institut für Informatik, Leipzig, Deutschland, \email{norbert.siegmund@uni-leipzig.de}}
+}
+\startpage{11} % Beginn der Seitenzählung für diesen Beitrag
+\editor{Herausgeber et al.}    % Namen der Herausgeber
+\booktitle{Name-der-Konferenz} % Name des Tagungsband; optional Kurztitel
+\yearofpublication{2017}
+%%%\lnidoi{18.18420/provided-by-editor-02} % Falls bekannt
+\maketitle
+
+\begin{abstract}
+The original paper was published under the title~\citetitle{muehlbauer_identifying_2020} in the proceedings of the ASE'20.
+
+TBD~\cite{muhlbauer_accurate_2019,muehlbauer_identifying_2020}
+\end{abstract}
+
+\begin{keywords}
+Software Performance; Configurable Software Systems; Software Evolution
+\end{keywords}
+
+
+
+%% \bibliography{lni-paper-example-de.tex} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
+%% Starten Sie "biber paper", um eine Biliographie zu erzeugen.
+\printbibliography
+
+\end{document}
