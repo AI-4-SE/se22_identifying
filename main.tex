@@ -16,6 +16,9 @@
 
 %\usepackage[subtle]{savetrees}
 \usepackage{microtype}
+\usepackage{paralist}
+\usepackage{wrapfig}
+
 
 %% BibLaTeX-Sonderkonfiguration,
 %% falls man schnell eine existierende Bibliographie wiederverwenden will, aber nicht die .bib-Datei händisch anpassen möchte.
@@ -49,27 +52,28 @@
 \author[Stefan Mühlbauer \and Sven Apel \and Norbert Siegmund]
 {Stefan Mühlbauer\footnote{Universität Leipzig, Institut für Informatik, Leipzig, Deutschland, \email{muehlbauer@informatik.uni-leipzig.de}} \and
 Sven Apel\textbf{\footnote{Universität des Saarlandes, Saarland Informatics Campus, Saarbrücken, Deutschland, \email{apel@cs.uni-saarland.de}}} \and
-Norbert Siegmund\footnote{Universität Leipzig, Institut für Informatik, Leipzig, Deutschland, \email{norbert.siegmund@uni-leipzig.de}}
+Norbert Siegmund\footnote{Universität Leipzig, Institut für Informatik, Leipzig, Deutschland, \email{norbert.siegmund@informatik.uni-leipzig.de}}
 }
 \startpage{11} % Beginn der Seitenzählung für diesen Beitrag
 \editor{Herausgeber et al.}    % Namen der Herausgeber
-\booktitle{Name-der-Konferenz} % Name des Tagungsband; optional Kurztitel
+\booktitle{Name-der-Konferenz} % Name des Taguwrapfigngsband; optional Kurztitel
 \yearofpublication{2017}
 %%%\lnidoi{18.18420/provided-by-editor-02} % Falls bekannt
 \maketitle
 
 \begin{abstract}
-The original paper was published under the title~\citetitle{muehlbauer_identifying_2020} in the proceedings of the ASE'20.
-
-TBD~\cite{muhlbauer_accurate_2019,muehlbauer_identifying_2020}
+{\color{blue!75!black}The original paper was published under the same title at ASE'20~\cite{muehlbauer_identifying_2020}.}
+Performance changes of configurable software systems can occur and persist throughout its lifetime. Finding optimal configurations and configuration options that influence performance is already difficult, but in the light of software evolution, configuration-dependent performance changes may lurk in a potentially large number of different versions of the system. 
+Building on previous work, we combine two perspectives---variability and time---and devise an approach to identify configuration-dependent performance changes retrospectively across the software variants and versions of a software system. In a nutshell, we iteratively sample pairs of configurations and versions and measure the respective performance, which we use to actively learn a model to estimate how likely a commit introduces a performance change. For such commits, we infer the configuration options that best explain observed performance changes. 
+Pursuing a search strategy with the goal of measuring selectively and incrementally further pairs, we increase the accuracy of identified change points related to configuration options and interactions.
+Our evaluation with both real-world software systems and synthesized data demonstrates that we can pinpoint performance shifts to individual configuration options and commits with high accuracy and at scale. 
 \end{abstract}
 
 \begin{keywords}
 Software Performance; Configurable Software Systems; Software Evolution
 \end{keywords}
 
-
-
+\vfill
 %% \bibliography{lni-paper-example-de.tex} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
 %% Starten Sie "biber paper", um eine Biliographie zu erzeugen.
 \printbibliography
