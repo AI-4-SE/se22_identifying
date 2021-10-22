@@ -10,6 +10,7 @@
 %% Schöne Tabellen mittels \toprule, \midrule, \bottomrule
 \usepackage{booktabs}
 
+
 %% Zu Demonstrationszwecken
 \usepackage[math]{blindtext}
 \usepackage{mwe}
@@ -18,6 +19,8 @@
 \usepackage{microtype}
 \usepackage{paralist}
 \usepackage{wrapfig}
+
+\usepackage{blindtext}
 
 
 %% BibLaTeX-Sonderkonfiguration,
@@ -62,7 +65,7 @@ Norbert Siegmund\footnote{Universität Leipzig, Institut für Informatik, Leipzi
 \maketitle
 
 \begin{abstract}
-{\color{blue!75!black}The original paper was published under the same title at ASE'20~\cite{muehlbauer_identifying_2020}.}
+%{\color{blue!75!black}The original paper was published under the same title at ASE'20~\cite{muehlbauer_identifying_2020}.}
 Performance changes of configurable software systems can occur and persist throughout its lifetime. Finding optimal configurations and configuration options that influence performance is already difficult, but in the light of software evolution, configuration-dependent performance changes may lurk in a potentially large number of different versions of the system. 
 Building on previous work, we combine two perspectives---variability and time---and devise an approach to identify configuration-dependent performance changes retrospectively across the software variants and versions of a software system. In a nutshell, we iteratively sample pairs of configurations and versions and measure the respective performance, which we use to actively learn a model to estimate how likely a commit introduces a performance change. For such commits, we infer the configuration options that best explain observed performance changes. 
 Pursuing a search strategy with the goal of measuring selectively and incrementally further pairs, we increase the accuracy of identified change points related to configuration options and interactions.
@@ -73,9 +76,16 @@ Our evaluation with both real-world software systems and synthesized data demons
 Software Performance; Configurable Software Systems; Software Evolution
 \end{keywords}
 
-\vfill
+\textbf{\color{purple}Motivation/Problem} Modern software systems often provide configuration options to customize functionality. Configuration decisions, however, can also influence the performance behavior of a system. Configuration-dependent performance behavior can be inferred from a subset of observations using machine learning, but performance influences can change along with software evolution. If such shifts remain undetected and persist, models from older versions make inaccurate estimations for newer versions. Maintaining accurate prediction models throughout a software's lifetime, for instance via transfer learning, incurs additional cost of measurement. By contrast, information about which options' influences change at what revision could guide practicioners to transfer or re-learn models only upon such an occurence. 
+
+\textbf{\color{purple}Approach}
+We address this problem and devise a novel approach to retrospectically identify shifts in the performance influence of options and combinations thereof across a software systems's development history.
+\cite{muhlbauer_accurate_2019,muehlbauer_identifying_2020}
+
+
 %% \bibliography{lni-paper-example-de.tex} ist hier nicht erlaubt: biblatex erwartet dies bei der Preambel
 %% Starten Sie "biber paper", um eine Biliographie zu erzeugen.
+\vfill
 \printbibliography
 
 \end{document}
