@@ -14,8 +14,7 @@
 %% Zu Demonstrationszwecken
 \usepackage[math]{blindtext}
 \usepackage{mwe}
-
-%\usepackage[subtle]{savetrees}
+\usepackage[subtle]{savetrees}
 \usepackage{microtype}
 \usepackage{paralist}
 \usepackage{wrapfig}
@@ -77,27 +76,27 @@ Software Performance; Configurable Software Systems; Software Evolution
 \end{keywords}
 
 %\textbf{\color{purple}Motivation/Problem} 
-Modern software systems often provide configuration options to customize functionality. Configuration decisions, however, can also influence the performance behavior of a system. Configuration-dependent performance behavior can be inferred from a subset of observations using machine learning, but performance influences can change along with software evolution. If such shifts remain undetected and persist, models from older versions make inaccurate estimations for newer versions. Maintaining accurate prediction models throughout a software's lifetime, for instance via transfer learning, incurs additional cost of measurement. By contrast, information about which options' influences change at what revision could guide practicioners to transfer or re-learn models only upon such an occurence. 
-We address this problem and devise a novel approach that retrospectively identifies shifts in the performance influence of options and combinations among them across a software systems’s development history~\cite{muehlbauer_identifying_2020}. 
+Modern software systems often provide configuration options to customize functionality. Configuration decisions, however, can also influence the performance behavior of a system. Configuration-dependent performance behavior can be inferred from a subset of observations using machine learning, but performance influences can change along with software evolution. If such shifts remain undetected and persist, models from older versions make inaccurate estimations for newer versions. Maintaining accurate prediction models throughout a software's lifetime incurs additional cost of measurement. By contrast, information about which options' influences change at what revision could guide practicioners to transfer or re-learn models only upon such an occurence. 
+We address this problem and devise a novel approach that \textit{retrospectively} identifies shifts in the performance influence of options and combinations among them across a software systems’s development history~\cite{muehlbauer_identifying_2020}. 
 
 In previous work, we outline how one can identify performance shifts in a series of performance measurements across revisions of a single software configuration with Gaussian Processes~\cite{muhlbauer_accurate_2019}. Configuration-specific change points can emerge from change in the performance influence of one or more configuration options. Hence, to not only identify performance shifts in arbitrary configurations, we extend our perspective of previous work~\cite{muhlbauer_accurate_2019} and incorporate  configurability into our analysis. 
-Starting from a small sample of performance measurements across random configurations, our active learning and sampling strategy \textit{first} estimates the temporal location of likely change points (candidate commits). If a performance shift is observed at a candidate commit for multiple configurations, the shift is marked for further analysis. \textit{Second}, we attribute each candidate shift to one or more configuration options based on for which configurations it manifests. \textit{Last}, to increase the reliability of these estimations, we iteratively feed new measurements to the training set and repeat the previous steps until we reach a steady state.
+Starting from a small sample of performance measurements across random configurations and revisions, our active learning and sampling strategy \textit{first} estimates the temporal location of likely change points (candidate commits). If a performance shift is observed at a candidate commit for multiple configurations, the shift is marked for further analysis. \textit{Second}, we attribute each candidate shift to one or more configuration options based on for which configurations it manifests. \textit{Last}, to increase the reliability of these estimations, we iteratively feed new measurements to the training set and repeat the previous steps until we reach a steady state.
 	
-Akin to learning configuration-dependent performance models, the main challenge with this approach is to wisely select configurations and revisions for measurement. To tame the combinatorial complexity of the configuration space, a modestly sized sample set 
+Akin to learning configuration-dependent performance models, the main challenge with this approach is to wisely select configurations and revisions for measurement. We tame the combinatorial complexity of the combined configuration-and-revision space by balancing the budget of measurements between two objectives. On the one hand, to be able to capture undetected performance shifts at all, configurations and revisions are sampled randomly (\textit{exploration}). On the other hand, we allocate a part of the budget to re-evaluate the candidate change points that our approach yields in each iteration (\textit{exploitation}). The cycle stops once the set of candidate solutions converges and remains about similar. Over the course of all iterations, we dedicate more and more measurements to exploitation, such that initially the training set is unbiased and guides later iterations towards refining candidate solutions.
 
 
-\begin{compactitem}
-	\item how to spend the budge (\textit{exploration} vs \textit{exploitation})?
-	\item explanation of active sampling and illustration of graphic
-\end{compactitem}
-
-\begin{wrapfigure}{R}{0.6\linewidth}
-	\centering
-	\includegraphics[width=\linewidth]{figs/sampling_plan}
-\end{wrapfigure}
+%\begin{wrapfigure}{R}{0.6\linewidth}%
+%	\centering
+%	\includegraphics[width=\linewidth]{figs/sampling_plan}
+%\end{wrapfigure}
 
 In a study with both real-world and synthesized data...
 
+{
+\paragraph{Data Availability} 
+\color{red}
+We provide all data and a reference implementation in the replication package~\footnote{\url{google.com/}}.
+}
 \vfill
 \printbibliography
 
