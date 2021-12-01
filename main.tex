@@ -14,7 +14,7 @@
 %% Zu Demonstrationszwecken
 \usepackage[math]{blindtext}
 \usepackage{mwe}
-%\usepackage[subtle]{savetrees}
+\usepackage[subtle]{savetrees}
 \usepackage{microtype}
 \usepackage{paralist}
 \usepackage{wrapfig}
@@ -76,13 +76,18 @@ Software Performance; Configurable Software Systems; Software Evolution
 \end{keywords}
 
 %\textbf{\color{purple}Motivation/Problem} 
-Modern software systems often provide configuration options to customize functionality. Configuration decisions, however, can also influence the performance behavior of a system. While configuration-dependent performance behavior can be inferred from a relatively small set of observations using machine learning, options' performance influence can change with software evolution. If such shifts remain undetected and persist, prediction models from older versions make inaccurate estimations for newer versions. Maintaining accurate prediction models throughout a software's lifetime naturally incurs additional cost of measurement. By contrast, information about which options' influences change at what revision could guide practicioners to re-learn models only upon such an occurence or guide future testing efforts. 
-We address this problem and devise a novel approach that \textit{retrospectively} identifies shifts in the performance influence of options and combinations among them across a software systems’s development history~\cite{muehlbauer_identifying_2020}. 
+Modern software systems often provide configuration options to customize their functionality and non-functional characteristics, such as energy consumption and performance. 
+Determining the influence of individual configuartion options and their interactions on performance is usually done in a two step-process. First, a set of configurations is selected and then measured via a benchmark or an application-specific workload. Second, a machine-learning technique, such as linear regression or classification and regression trees, are applied to learn a performance model using the measurements as training set. With the resulting model, we can estimate performance of unseen configurations or compute the performance optimal one.
 
-In previous work, we presented how one can identify performance shifts in a series of performance measurements, for instance of a single software configuration~\cite{muhlbauer_accurate_2019}.
+However, software is not a static entity and as the code base changes so does performance. If the influence of options or interactions on performance change, prediction models from older versions make inaccurate estimations for newer versions. Maintaining accurate prediction models throughout a software's lifetime vastly increases the cost of measurement since we would blindly select configurations throughout the version history of a system to find the relevant change points.
+
+By contrast, information about which options' influences change at what revision could guide practicioners to re-learn models only upon such an occurence or guide future testing efforts. 
+We address the problem of detecting change points in space (configuration dimension) and time (version dimension) and devise a novel approach that \textit{retrospectively} identifies shifts in the performance influence of options and combinations among them across a software systems’s development history~\cite{muehlbauer_identifying_2020}. 
+
+In previous work, we presented how one can identify performance shifts in a series of performance measurements of a single software configuration~\cite{muhlbauer_accurate_2019}.
 Since configuration-specific performance changes often emerge from changes in the performance influence of one or more configuration options, it is key to identify such causative options. To this end, we extend our perspective from previous work~\cite{muhlbauer_accurate_2019} and pinpoint performance change not only to a specific commit, but also a set of responsible configuration options. 
 
-Starting from performance measurements of a small sample of random configurations and revisions, our active learning and sampling strategy \textit{first} estimates the temporal location of likely change points (candidate commits). If a performance shift is observed at a candidate commit for multiple configurations, the shift is marked for further analysis (candidate shift). \textit{Second}, we attribute each candidate shift to one or more configuration options based on the configurations for which it manifests. \textit{Last}, to increase the reliability of these estimations, we iteratively add new measurements to the training set and repeat the previous steps until the set of identified change points does not change over a couple of iterations.
+Starting from performance measurements of a small sample of random configurations and revisions, our active learning and sampling strategy first estimates the temporal location of likely change points (candidate commits). If a performance shift is observed at a candidate commit for multiple configurations, the shift is marked for further analysis (candidate shift). Second, we attribute each candidate shift to one or more configuration options based on the configurations for which it manifests. Last, to increase the reliability of these estimations, we iteratively add new measurements to the training set and repeat the previous steps until the set of identified change points does not change over a couple of iterations.
 
 The main challenge with this approach is the combinatorial complexity of the combined configuration-and-revision space. To wisely select configurations and revisions, we balance the budget of measurements between two objectives, \textit{exploration} and \textit{exploitation}. To be able to capture undetected performance shifts at all, we sample most configurations and revisions randomly ({exploration}), whereas we dedicate the remaining budget is to re-evaluating and refining the candidate change points that our approach yields in each iteration ({exploitation}). While the initial sample set is entirely random, we gradually increase the number of exploitation measurements with every iteration. 
 
@@ -90,7 +95,7 @@ The main challenge with this approach is the combinatorial complexity of the com
 
 In a study with three real-world software systems, we show that our approach can precisely pinpoint configuration-specific performance changes to a single commit and associate it with related configuration options. Further experiments with synthetic data demonstrate that our approach can operate at scale with regard to the number of commits of a version history, the number of configuration options, and the degree of option interactions.
 
-\paragraph{Data Availability} 
+\textbf{Data Availability}~~
 We make all measurement data and a reference implementation of our approach~\cite{muehlbauer_identifying_2020} available in the original paper's replication package~\footnote{\url{https://archive.softwareheritage.org/browse/origin/directory/?origin_url=https://github.com/AI-4-SE/Changepoints-Across-Variants-And-Versions}}.
 \printbibliography
 
